@@ -47,21 +47,25 @@ public class MainActivity extends AppCompatActivity {
                 {
                     if(gender == "boy")
                     {
-                        intent.putExtra("imageResource", R.drawable.boy_normal);;
+                        intent.putExtra("imageResource", R.drawable.boy_normal);
+                        intent.putExtra("BMI",bmi);
                     }
                     else
                     {
-                        intent.putExtra("imageResource", R.drawable.girl_normal);;
+                        intent.putExtra("imageResource", R.drawable.girl_normal);
+                        intent.putExtra("BMI",bmi);
 
                     }
                 } else{
                     if(gender == "boy" )
                     {
-                        intent.putExtra("imageResource", R.drawable.boy_overweight);;
+                        intent.putExtra("imageResource", R.drawable.boy_overweight);
+                        intent.putExtra("BMI",bmi);
 
                     }
                     else {
-                        intent.putExtra("imageResource", R.drawable.girl_overweight);;
+                        intent.putExtra("imageResource", R.drawable.girl_overweight);
+                        intent.putExtra("BMI",bmi);
 
                     }
                 }
