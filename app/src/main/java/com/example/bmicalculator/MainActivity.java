@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,56 +35,71 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String height_val = height.getText().toString();
-                String weight_val = weight.getText().toString() ;
+                String weight_val = weight.getText().toString();
 
-                float height_float = Float.parseFloat(height_val);
-                float weight_float = Float.parseFloat(weight_val);
-
-
-                float bmi = calBmi(height_float,weight_float);
-
-
-
-                Intent intent = new Intent(MainActivity.this, Result_activity.class);
-                if((bmi > 18.5) && (bmi<24.9))
-                {
-                    if(gender == "boy")
-                    {
-                        intent.putExtra("imageResource", R.drawable.boy_normal);
-                        intent.putExtra("BMI",bmi);
-                    }
-                    else
-                    {
-                        intent.putExtra("imageResource", R.drawable.girl_normal);
-                        intent.putExtra("BMI",bmi);
-
-                    }
-                } else{
-                    if(gender == "boy" )
-                    {
-                        intent.putExtra("imageResource", R.drawable.boy_overweight);
-                        intent.putExtra("BMI",bmi);
-
-                    }
-                    else {
-                        intent.putExtra("imageResource", R.drawable.girl_overweight);
-                        intent.putExtra("BMI",bmi);
-
-                    }
+                if (height_val.isEmpty()&&weight_val.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Enter Height(cm) and Weight(kg)", Toast.LENGTH_LONG).show();
+                }else if (height_val.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Enter Height in Cm ", Toast.LENGTH_LONG).show();
                 }
-                startActivity(intent);
+                else if(weight_val.isEmpty()){
+                            Toast.makeText(MainActivity.this, "Enter Weight in Kg ",Toast.LENGTH_LONG).show();
+
+                } else {
+                    try {
+                        float height_float = Float.parseFloat(height_val);
+                        float weight_float = Float.parseFloat(weight_val);
+                        float bmi = calBmi(height_float, weight_float);
+
+
+                        Intent intent = new Intent(MainActivity.this, Result_activity.class);
+                        if ((bmi > 18.5) && (bmi < 24.9)) {
+                            if (gender == "boy") {
+                                intent.putExtra("imageResource", R.drawable.boy_normal);
+                                intent.putExtra("BMI", bmi);
+                            } else {
+                                intent.putExtra("imageResource", R.drawable.girl_normal);
+                                intent.putExtra("BMI", bmi);
+
+                            }
+                        } else {
+                            if (gender == "boy") {
+                                intent.putExtra("imageResource", R.drawable.boy_overweight);
+                                intent.putExtra("BMI", bmi);
+
+                            } else {
+                                intent.putExtra("imageResource", R.drawable.girl_overweight);
+                                intent.putExtra("BMI", bmi);
+
+                            }
+                        }
+                        startActivity(intent);
+
+                    } catch (Exception e)
+                    {
+                        Toast.makeText(MainActivity.this,"PLease Enter Details In Correct Format",Toast.LENGTH_SHORT).show();
+                    }
+
+                }
 
             }
         });
+
         gender_rdgb.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+                if(checkedId == -1)
+                {
+                    Toast.makeText(MainActivity.this,"PLease Select Gender",Toast.LENGTH_SHORT).show();
+                }
                 if(checkedId == R.id.boy_rb)
                 {
                     gender = "boy";
                 }
-                if(checkedId == R.id.girl_rb)
+                else if(checkedId == R.id.girl_rb)
                 {
                     gender = "girl";
                 }

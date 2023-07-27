@@ -26,6 +26,11 @@
         android:gravity="center"
         android:layout_centerInParent="true"
         >
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/textInputLayout"-->
+
+<!--            android:hint="Enter Your Height And Weight">-->
+
         <EditText
             android:layout_width="250dp"
             android:layout_height="wrap_content"
@@ -47,6 +52,7 @@
             android:orientation="horizontal"
             android:layout_margin="2dp"
             android:id="@+id/gender_rg"
+            android:preferKeepClear="true"
             >
             <RadioButton
                 android:layout_width="wrap_content"
